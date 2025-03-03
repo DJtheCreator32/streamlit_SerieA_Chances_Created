@@ -61,7 +61,33 @@ st.title("세리에 A 24 25 기회 창출")
 st.subheader("코너킥을 제외한 플레이만 표시합니다.")
 
 # Load Data
-df = pd.read_csv('SerieA2425.csv')
+# Google Drive Direct Link to ZIP (Replace FILE_ID with your actual ID)
+zip_url = "https://drive.google.com/file/d/1_KY9rhBB-xcrRTpDajCuVAgF1l8zLshj/view?usp=drive_link"
+
+@st.cache_data  # Cache to avoid repeated downloads
+def load_data():
+    response = requests.get(zip_url)
+    if response.status_code == 200:
+        with zipfile.ZipFile(BytesIO(response.content), "r") as zip_ref:
+            # Find first CSV in ZIP
+            csv_filename = [name for name in zip_ref.namelist() if name.endswith(".csv")][0]
+
+            # Read CSV
+            with zip_ref.open(csv_filename) as csv_file:
+                df = pd.read_csv(csv_file)
+
+        return df
+    else:
+        st.error("❌ Failed to download the dataset.")
+        return None
+
+df = load_data()
+
+if df is not None:
+    st.success("✅ File loaded successfully from Google Drive!")
+    st.write(df.head())  # Show preview
+else:
+    st.warning("⚠️ Please check the file link or upload manually.")
 
 
 
