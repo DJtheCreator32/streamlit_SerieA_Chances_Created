@@ -69,12 +69,47 @@ import streamlit as st
 import requests
 from io import BytesIO
 
-st.title("세리에 A 24 25 기회 창출")
-st.subheader("코너킥을 제외한 플레이만 표시합니다.")
+# GitHub Raw URL for the ZIP file (Replace with your actual GitHub link)
+zip_url = "https://github.com/DJtheCreator32/streamlit_SerieA_chances_Created/raw/main/SerieA2425.zip"
 
+@st.cache_data  # Cache the download to prevent multiple requests
+def load_data():
+    try:
+        # Download the ZIP file from GitHub
+        response = requests.get(zip_url, stream=True)
+        if response.status_code != 200:
+            st.error(f"❌ Failed to download file. HTTP Status: {response.status_code}")
+            return None
 
-# Load Data
-df = pd.read_csv('SerieA2425.csv')
+        # Read ZIP file
+        with zipfile.ZipFile(BytesIO(response.content), "r") as zip_ref:
+            # Find the CSV inside the ZIP
+            csv_files = [name for name in zip_ref.namelist() if name.endswith(".csv")]
+            
+            if not csv_files:
+                st.error("❌ No CSV file found inside the ZIP.")
+                return None
+
+            csv_filename = csv_files[0]  # Select the first CSV
+            
+            # Read CSV data
+            with zip_ref.open(csv_filename) as csv_file:
+                df = pd.read_csv(csv_file)
+
+        return df
+
+    except Exception as e:
+        st.error(f"❌ Error loading data: {e}")
+        return None
+
+# Load data from GitHub ZIP file
+df = load_data()
+
+if df is not None:
+    st.success("✅ File loaded successfully from GitHub!")
+    st.write(df.head())  # Show preview
+else:
+    st.warning("⚠️ Please check the file link or upload manually.")
 
 # Column mapping
 column_mapping = {
