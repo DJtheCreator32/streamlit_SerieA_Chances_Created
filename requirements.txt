@@ -1,2 +1,7 @@
 pandas
 mplsoccer
+tqdm
+highlight-text
+beautifulsoup4
+scikit-learn
+unidecode 
