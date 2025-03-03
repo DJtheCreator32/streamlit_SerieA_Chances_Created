@@ -77,19 +77,32 @@ zip_url = "https://drive.google.com/uc?export=download&id=https://drive.google.c
 
 @st.cache_data  # Cache to avoid repeated downloads
 def load_data():
-    response = requests.get(zip_url)
-    if response.status_code == 200:
-        with zipfile.ZipFile(BytesIO(response.content), "r") as zip_ref:
-            # Find first CSV in ZIP
-            csv_filename = [name for name in zip_ref.namelist() if name.endswith(".csv")][0]
+    try:
+        # Download ZIP file
+        response = requests.get(zip_url, stream=True)
+        if response.status_code != 200:
+            st.error(f"❌ Failed to download file. HTTP Status: {response.status_code}")
+            return None
 
-            # Read CSV
+        # Read ZIP file
+        with zipfile.ZipFile(BytesIO(response.content), "r") as zip_ref:
+            # Find CSV file inside ZIP
+            csv_files = [name for name in zip_ref.namelist() if name.endswith(".csv")]
+            
+            if not csv_files:
+                st.error("❌ No CSV file found inside the ZIP.")
+                return None
+
+            csv_filename = csv_files[0]  # Select the first CSV
+            
+            # Read CSV data
             with zip_ref.open(csv_filename) as csv_file:
                 df = pd.read_csv(csv_file)
-
+        
         return df
-    else:
-        st.error("❌ Failed to download the dataset.")
+
+    except Exception as e:
+        st.error(f"❌ Error loading data: {e}")
         return None
 
 df = load_data()
@@ -99,7 +112,6 @@ if df is not None:
     st.write(df.head())  # Show preview
 else:
     st.warning("⚠️ Please check the file link or upload manually.")
-
 
 
 # Column mapping
