@@ -62,7 +62,18 @@ st.subheader("코너킥을 제외한 플레이만 표시합니다.")
 
 # Load Data
 # Google Drive Direct Link to ZIP (Replace FILE_ID with your actual ID)
-zip_url = "https://drive.google.com/file/d/1_KY9rhBB-xcrRTpDajCuVAgF1l8zLshj/view?usp=drive_link"
+
+import zipfile
+import pandas as pd
+import streamlit as st
+import requests
+from io import BytesIO
+
+st.title("세리에 A 24 25 기회 창출")
+st.subheader("코너킥을 제외한 플레이만 표시합니다.")
+
+# Google Drive Direct Link to ZIP (Replace FILE_ID with your actual ID)
+zip_url = "https://drive.google.com/uc?export=download&id=https://drive.google.com/file/d/1_KY9rhBB-xcrRTpDajCuVAgF1l8zLshj/view?usp=drive_link"
 
 @st.cache_data  # Cache to avoid repeated downloads
 def load_data():
