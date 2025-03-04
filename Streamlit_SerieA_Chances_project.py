@@ -232,8 +232,13 @@ assist_count = len(g_assist)
 chance_count = len(big_chance) + len(key_pass)
 import matplotlib.pyplot as plt
 
-plt.rcParams['font.family'] = 'NanumGothic'
-# Display the number of assists on the plot
+import matplotlib.pyplot as plt
+import matplotlib.font_manager as fm
+
+# Load the uploaded font
+font_path = "NanumGothic-Regular.ttf"  # Ensure this file exists in your project folder
+font_prop = fm.FontProperties(fname=font_path)
+plt.rcParams['font.family'] = font_prop.get_name()  # Set the custom font
 import matplotlib.patches as patches
 
 # Add text for assists
