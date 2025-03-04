@@ -235,14 +235,18 @@ import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
 # Load the uploaded font
-font_path = r"C:\Users\leedo\streamlit_SerieA_Chances_Created\NanumGothic-Regular.ttf"  # Ensure this file exists in your project folder
-font_props = fm.FontProperties(fname=font_path)
-plt.rcParams['font.family'] = font_props.get_name()  # Set the custom font
+font_path = "NanumGothic-Regular.ttf"
+
+if not os.path.exists(font_path):
+    raise FileNotFoundError(f"Font file '{font_path}' not found! Upload it to your Streamlit project.")
+
+font_prop = fm.FontProperties(fname=font_path)
+plt.rcParams['font.family'] = font_prop.get_name()  # Set custom font
 
 import matplotlib.patches as patches
 
 # Add text for assists
-fig.text(0.19, 0.88, f"도움 ({assist_count})", fontsize=15, ha='left', va='center', color='#000000', fontproperties=font_props)
+fig.text(0.19, 0.88, f"도움 ({assist_count})", fontsize=15, ha='left', va='center', color='#000000')
 
 # Add a circle next to the text with adjustable size and edge color
 circle_size = 0.01  # Adjust size of the circle
