@@ -58,7 +58,7 @@ fprop = FontManager(URL).prop
 img_save_loc='D:\CoCoding\DJ\Football Analytics\Data Visualization\\MatchReports'
 
 st.title("세리에 A 24 25 기회 창출")
-st.subheader("코너킥을 제외한 플레이만 표시합니다.")
+st.subheader("세트피스를 제외한 플레이만 표시합니다.")
 
 # Load Data
 # Google Drive Direct Link to ZIP (Replace FILE_ID with your actual ID)
