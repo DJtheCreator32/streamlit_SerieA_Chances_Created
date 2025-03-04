@@ -265,7 +265,7 @@ fig.text(0.19, 0.88, f"도움 ({assist_count})", fontsize=15,
 fig.text(0.3, 0.88, f"기회 창출 ({chance_count})", fontsize=15,
          ha='left', va='center', color='#000000')
 fig.text(0.18, 0.95, f"{player}", fontsize=30, fontweight='bold', ha='left', va='center', fontproperties=fprop, color='#000000')
-fig.text(0.19, 0.91, f'세리에 A 2024-25 | 1라운드부터 26까지', fontsize=15, ha='left', va='center', fontproperties=fprops)
+fig.text(0.19, 0.91, f'세리에 A 2024-25 | 1라운드부터 26까지', fontsize=15, ha='left', va='center', fontproperties=font_props)
 
 # Get ftmb_tid for the selected team (make sure it's an integer)
 ftmb_tid = df.loc[df['teamName'] == team, 'ftmb_tid'].values
