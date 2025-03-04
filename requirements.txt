@@ -5,3 +5,4 @@ highlight-text
 beautifulsoup4
 scikit-learn
 unidecode 
+matplotlib
