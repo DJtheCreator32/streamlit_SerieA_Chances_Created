@@ -168,7 +168,7 @@ def plot_chances_created(df, ax, pitch):
     if df is None or df.empty:
         return  # Prevents errors when no data is available
     
-    df = df[df['qualifiers'].str.contains('KeyPass|BigChanceCreated|IntentionalGoalAssist', na=False)]
+    df = df[df['qualifiers'].str.contains('KeyPass|IntentionalGoalAssist', na=False)]
     
     for x in df.to_dict(orient='records'):
 
@@ -218,18 +218,14 @@ ax.annotate(xy=(102, 70),
 # Filter for each type of pass event
 g_assist = df[(df['teamName'] == team) & (df['name'] == player) & (df['qualifiers'].str.contains('IntentionalGoalAssist', na=False))]
 key_pass = df[(df['teamName'] == team) & (df['name'] == player) & (df['qualifiers'].str.contains('KeyPass', na=False))]
-big_chance = df[(df['teamName'] == team) & (df['name'] == player) & (df['qualifiers'].str.contains('BigChanceCreated', na=False))]
 
 # Find exact duplicate events between key_pass and big_chance
-duplicates = key_pass.merge(big_chance, on=['matchId', 'eventId', 'x', 'y'], how='inner')
 
 # Drop these duplicates from both key_pass and big_chance
-key_pass = key_pass[~key_pass.set_index(['matchId', 'eventId', 'x', 'y']).index.isin(duplicates.set_index(['matchId', 'eventId', 'x', 'y']).index)]
-big_chance = big_chance[~big_chance.set_index(['matchId', 'eventId', 'x', 'y']).index.isin(duplicates.set_index(['matchId', 'eventId', 'x', 'y']).index)]
 
 # Get final counts
 assist_count = len(g_assist)
-chance_count = len(big_chance) + len(key_pass)
+chance_count = len(key_pass)
 import matplotlib.pyplot as plt
 
 import matplotlib.pyplot as plt
