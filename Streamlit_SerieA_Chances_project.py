@@ -232,16 +232,18 @@ assist_count = len(g_assist)
 chance_count = len(big_chance) + len(key_pass)
 import matplotlib.pyplot as plt
 
+import os
 import matplotlib.font_manager as fm
 
-# Load the uploaded font
-font_path = "NanumGothic-Regular.ttf"
+font_path = "NanumGothic-Regular.ttf"  # Use a relative path
 
+# Check if the font exists
 if not os.path.exists(font_path):
     raise FileNotFoundError(f"Font file '{font_path}' not found! Upload it to your Streamlit project.")
 
+# Load the font
 font_prop = fm.FontProperties(fname=font_path)
-plt.rcParams['font.family'] = font_prop.get_name()  # Set custom font
+plt.rcParams['font.family'] = font_prop.get_name()
 
 import matplotlib.patches as patches
 
