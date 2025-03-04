@@ -249,7 +249,7 @@ else:
 import matplotlib.patches as patches
 
 # Add text for assists
-fig.text(0.19, 0.88, f"도움 ({assist_count})", fontsize=15, ha='left', va='center', color='#000000')
+fig.text(0.19, 0.88, f"도움 ({assist_count})", fontsize=15, ha='left', va='center', color='#000000', fontproperties=font_props)
 
 # Add a circle next to the text with adjustable size and edge color
 circle_size = 0.01  # Adjust size of the circle
@@ -261,9 +261,9 @@ circle2 = patches.Circle((0.45, 0.88), circle_size, transform=fig.transFigure,
 fig.patches.append(circle)  # Add circle to figure
 fig.patches.append(circle2)  # Add circle to figure
 fig.text(0.19, 0.88, f"도움 ({assist_count})", fontsize=15,
-         ha='left', va='center', color='#000000')
+         ha='left', va='center', color='#000000', fontproperties=font_props)
 fig.text(0.3, 0.88, f"기회 창출 ({chance_count})", fontsize=15,
-         ha='left', va='center', color='#000000')
+         ha='left', va='center', color='#000000', fontproperties=font_props)
 fig.text(0.18, 0.95, f"{player}", fontsize=30, fontweight='bold', ha='left', va='center', fontproperties=fprop, color='#000000')
 fig.text(0.19, 0.91, f'세리에 A 2024-25 | 1라운드부터 26까지', fontsize=15, ha='left', va='center', fontproperties=font_props)
 
@@ -303,8 +303,8 @@ line = ax.plot([line_x_start, line_x_end], [line_y_start, line_y_end],
 fig.canvas.draw()
 
 fig.text(0.56, 0.88, f"패스한 위치", fontsize=15,
-         ha='left', va='center', color='#000000')
+         ha='left', va='center', color='#000000', fontproperties=font_props)
 fig.text(0.82, 0.88, f"패스 받은 위치", fontsize=15,
-         ha='left', va='center', color='#000000')
+         ha='left', va='center', color='#000000', fontproperties=font_props)
 plt.show()
 st.pyplot(fig)
