@@ -294,4 +294,5 @@ fig.text(0.56, 0.88, f"패스한 위치", fontsize=15,
          ha='left', va='center', color='#000000')
 fig.text(0.82, 0.88, f"패스 받은 위치", fontsize=15,
          ha='left', va='center', color='#000000')
+plt.show()
 st.pyplot(fig)
