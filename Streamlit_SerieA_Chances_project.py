@@ -232,18 +232,19 @@ assist_count = len(g_assist)
 chance_count = len(big_chance) + len(key_pass)
 import matplotlib.pyplot as plt
 
-import os
+import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
+import os
 
-font_path = "NanumGothic-Regular.ttf"  # Use a relative path
+# Font path (ensure it's in the same directory)
+font_path = "NanumGothic-Regular.ttf"
 
-# Check if the font exists
-if not os.path.exists(font_path):
-    raise FileNotFoundError(f"Font file '{font_path}' not found! Upload it to your Streamlit project.")
-
-# Load the font
-font_prop = fm.FontProperties(fname=font_path)
-plt.rcParams['font.family'] = font_prop.get_name()
+# Check if font exists
+if os.path.exists(font_path):
+    font_props = fm.FontProperties(fname=font_path)
+    plt.rcParams['font.family'] = font_props.get_name()  # Set the custom font
+else:
+    raise FileNotFoundError(f"Font file '{font_path}' not found! Upload it to your project.")
 
 import matplotlib.patches as patches
 
@@ -264,7 +265,7 @@ fig.text(0.19, 0.88, f"도움 ({assist_count})", fontsize=15,
 fig.text(0.3, 0.88, f"기회 창출 ({chance_count})", fontsize=15,
          ha='left', va='center', color='#000000')
 fig.text(0.18, 0.95, f"{player}", fontsize=30, fontweight='bold', ha='left', va='center', fontproperties=fprop, color='#000000')
-fig.text(0.19, 0.91, f'세리에 A 2024-25 | 1라운드부터 26까지', fontsize=15, ha='left', va='center')
+fig.text(0.19, 0.91, f'세리에 A 2024-25 | 1라운드부터 26까지', fontsize=15, ha='left', va='center', fontproperties=fprops)
 
 # Get ftmb_tid for the selected team (make sure it's an integer)
 ftmb_tid = df.loc[df['teamName'] == team, 'ftmb_tid'].values
