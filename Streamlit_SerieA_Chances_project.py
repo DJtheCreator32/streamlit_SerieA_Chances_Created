@@ -232,13 +232,10 @@ assist_count = len(g_assist)
 chance_count = len(big_chance) + len(key_pass)
 import matplotlib.pyplot as plt
 
-import matplotlib.pyplot as plt
 import matplotlib.font_manager as fm
 
-# Load the uploaded font
-font_path = f"C:\Users\leedo\streamlit_SerieA_Chances_Created\NanumGothic-Regular.ttf"  # Ensure this file exists in your project folder
-font_prop = fm.FontProperties(fname=font_path)
-plt.rcParams['font.family'] = font_prop.get_name()  # Set the custom font
+plt.rcParams['font.family'] = 'NanumGothic'
+
 import matplotlib.patches as patches
 
 # Add text for assists
