@@ -234,7 +234,10 @@ import matplotlib.pyplot as plt
 
 import matplotlib.font_manager as fm
 
-plt.rcParams['font.family'] = 'NanumGothic'
+# Load the uploaded font
+font_path = r"C:\Users\leedo\streamlit_SerieA_Chances_Created\NanumGothic-Regular.ttf"  # Ensure this file exists in your project folder
+font_prop = fm.FontProperties(fname=font_path)
+plt.rcParams['font.family'] = font_prop.get_name()  # Set the custom font
 
 import matplotlib.patches as patches
 
