@@ -230,7 +230,9 @@ big_chance = big_chance[~big_chance.set_index(['matchId', 'eventId', 'x', 'y']).
 # Get final counts
 assist_count = len(g_assist)
 chance_count = len(big_chance) + len(key_pass)
-plt.rcParams['font.family'] = 'Malgun Gothic'
+import matplotlib.pyplot as plt
+
+plt.rcParams['font.family'] = 'NanumGothic'
 # Display the number of assists on the plot
 import matplotlib.patches as patches
 
